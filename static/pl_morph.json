@@ -1,0 +1,388 @@
+{
+  "ATTR2FEATS": {
+    "Part of Speech": [
+      "pacta",
+      "pcon",
+      "subst",
+      "fin",
+      "impt",
+      "imps",
+      "ger",
+      "adja",
+      "adv",
+      "ppron3",
+      "conj",
+      "ppron12",
+      "part",
+      "pant",
+      "pred",
+      "prep",
+      "adjp",
+      "num",
+      "inf",
+      "frag",
+      "pact",
+      "cond",
+      "bedzie",
+      "depr",
+      "brev",
+      "comp",
+      "interj",
+      "aglt",
+      "numcomp",
+      "adjc",
+      "winien",
+      "praet",
+      "ppas",
+      "adj",
+      "siebie",
+      "emo",
+      "interp",
+      "romandig",
+      "dig",
+      "ign"
+    ],
+    "person": [
+      "pri",
+      "sec",
+      "ter"
+    ],
+    "case": [
+      "nom",
+      "acc",
+      "dat",
+      "gen",
+      "inst",
+      "loc",
+      "voc"
+    ],
+    "gender": [
+      "f",
+      "m1",
+      "m2",
+      "m3",
+      "n"
+    ],
+    "negation": [
+      "aff",
+      "neg"
+    ],
+    "number": [
+      "sg",
+      "pl"
+    ],
+    "degree": [
+      "pos",
+      "com",
+      "sup"
+    ],
+    "aspect": [
+      "perf",
+      "imperf"
+    ],
+    "prepositionality": [
+      "npraep",
+      "praep"
+    ],
+    "accomodability": [
+      "congr",
+      "rec"
+    ],
+    "accentibility": [
+      "akc",
+      "nakc"
+    ],
+    "agglutination": [
+      "agl",
+      "nagl"
+    ],
+    "vocality": [
+      "nwok",
+      "wok"
+    ],
+    "fullstoppedness": [
+      "npun",
+      "pun"
+    ],
+    "collectivity": [
+      "col",
+      "ncol",
+      "pt"
+    ]
+  },
+  "VAL2ATTR": {
+    "pacta": "Part of Speech",
+    "pcon": "Part of Speech",
+    "subst": "Part of Speech",
+    "fin": "Part of Speech",
+    "impt": "Part of Speech",
+    "imps": "Part of Speech",
+    "ger": "Part of Speech",
+    "adja": "Part of Speech",
+    "adv": "Part of Speech",
+    "ppron3": "Part of Speech",
+    "conj": "Part of Speech",
+    "ppron12": "Part of Speech",
+    "part": "Part of Speech",
+    "pant": "Part of Speech",
+    "pred": "Part of Speech",
+    "prep": "Part of Speech",
+    "adjp": "Part of Speech",
+    "num": "Part of Speech",
+    "inf": "Part of Speech",
+    "frag": "Part of Speech",
+    "pact": "Part of Speech",
+    "cond": "Part of Speech",
+    "bedzie": "Part of Speech",
+    "depr": "Part of Speech",
+    "brev": "Part of Speech",
+    "comp": "Part of Speech",
+    "interj": "Part of Speech",
+    "aglt": "Part of Speech",
+    "numcomp": "Part of Speech",
+    "adjc": "Part of Speech",
+    "winien": "Part of Speech",
+    "praet": "Part of Speech",
+    "ppas": "Part of Speech",
+    "adj": "Part of Speech",
+    "pri": "person",
+    "sec": "person",
+    "ter": "person",
+    "nom": "case",
+    "acc": "case",
+    "dat": "case",
+    "gen": "case",
+    "inst": "case",
+    "loc": "case",
+    "voc": "case",
+    "f": "gender",
+    "m1": "gender",
+    "m2": "gender",
+    "m3": "gender",
+    "n": "gender",
+    "aff": "negation",
+    "neg": "negation",
+    "sg": "number",
+    "pl": "number",
+    "pos": "degree",
+    "com": "degree",
+    "sup": "degree",
+    "perf": "aspect",
+    "imperf": "aspect",
+    "npraep": "prepositionality",
+    "praep": "prepositionality",
+    "congr": "accomodability",
+    "rec": "accomodability",
+    "akc": "accentibility",
+    "nakc": "accentibility",
+    "agl": "agglutination",
+    "nagl": "agglutination",
+    "nwok": "vocality",
+    "wok": "vocality",
+    "npun": "fullstoppedness",
+    "pun": "fullstoppedness",
+    "col": "collectivity",
+    "ncol": "collectivity",
+    "pt": "collectivity",
+    "emo": "Part of Speech",
+    "interp": "Part of Speech",
+    "romandig": "Part of Speech",
+    "siebie": "Part of Speech",
+    "dig": "Part of Speech",
+    "ign": "Part of Speech"
+  },
+  "GOVERNING_DEPRELS": [
+    "detmod:numgov",
+    "det:numgov",
+    "nummod:gov"
+  ],
+  "ACCOMODATION_RULES": {
+    "acl": [
+      "number",
+      "gender",
+      "case",
+      "negation"
+    ],
+    "acl:relcl": [
+      "collectivity",
+      "negation"
+    ],
+    "advcl": [
+      "negation",
+      "agglutination"
+    ],
+    "advcl:cmpr": [
+      "person"
+    ],
+    "amod": [
+      "number",
+      "gender",
+      "case",
+      "fullstoppedness"
+    ],
+    "amod:flat": [
+      "number",
+      "gender",
+      "case",
+      "degree"
+    ],
+    "appos": [
+      "aspect",
+      "collectivity",
+      "negation"
+    ],
+    "aux": [
+      "number",
+      "gender",
+      "aspect"
+    ],
+    "aux:clitic": [
+      "number"
+    ],
+    "aux:pass": [
+      "number",
+      "gender"
+    ],
+    "ccomp": [
+      "negation"
+    ],
+    "ccomp:cleft": [
+      "collectivity"
+    ],
+    "ccomp:obj": [
+      "negation"
+    ],
+    "conj": [
+      "case",
+      "collectivity",
+      "degree",
+      "negation",
+      "agglutination",
+      "accentibility",
+      "prepositionality"
+    ],
+    "cop": [
+      "number"
+    ],
+    "det": [
+      "number",
+      "gender",
+      "case"
+    ],
+    "det:numgov": [
+      "gender",
+      "collectivity"
+    ],
+    "det:nummod": [
+      "number",
+      "gender",
+      "case",
+      "collectivity"
+    ],
+    "det:poss": [
+      "number",
+      "gender",
+      "case",
+      "degree"
+    ],
+    "fixed": [
+      "number",
+      "aspect",
+      "collectivity",
+      "degree",
+      "vocality"
+    ],
+    "flat": [
+      "number",
+      "collectivity",
+      "fullstoppedness"
+    ],
+    "iobj": [
+      "negation"
+    ],
+    "list": [
+      "case"
+    ],
+    "nmod": [
+      "negation"
+    ],
+    "nmod:arg": [
+      "collectivity"
+    ],
+    "nmod:flat": [
+      "collectivity"
+    ],
+    "nmod:pred": [
+      "number",
+      "aspect",
+      "negation"
+    ],
+    "nsubj": [
+      "person",
+      "collectivity",
+      "negation"
+    ],
+    "nsubj:pass": [
+      "number",
+      "gender",
+      "case",
+      "negation"
+    ],
+    "nummod": [
+      "number",
+      "gender",
+      "case",
+      "collectivity"
+    ],
+    "nummod:flat": [
+      "number",
+      "gender",
+      "case"
+    ],
+    "nummod:gov": [
+      "number",
+      "collectivity"
+    ],
+    "obj": [
+      "collectivity",
+      "negation",
+      "fullstoppedness"
+    ],
+    "obl": [
+      "negation"
+    ],
+    "obl:agent": [
+      "collectivity",
+      "negation"
+    ],
+    "obl:arg": [
+      "degree",
+      "negation"
+    ],
+    "obl:cmpr": [
+      "collectivity",
+      "negation"
+    ],
+    "orphan": [
+      "degree",
+      "accentibility"
+    ],
+    "parataxis:insert": [
+      "collectivity",
+      "accomodability"
+    ],
+    "parataxis:obj": [
+      "collectivity"
+    ],
+    "vocative": [
+      "person"
+    ],
+    "xcomp": [
+      "number",
+      "negation"
+    ],
+    "xcomp:cleft": [
+      "number"
+    ]
+  }
+}
