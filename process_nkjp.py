@@ -1,5 +1,6 @@
 import os
 import random
+import json
 import conllu
 import spacy
 from tqdm import tqdm
@@ -16,6 +17,11 @@ CONLLU_PATH = "resources/NKJP_UD/NKJP1M-UD.conllu"
 XML_DIR = "resources/NKJP/"
 PDB_TEST = "resources/UD_Polish-PDB/pl_pdb-ud-test.conllu"
 PDB_DEV = "resources/UD_Polish-PDB/pl_pdb-ud-dev.conllu"
+
+with open("static/pl_morph.json") as f:
+    morph_data = json.load(f)
+
+
 
 
 def parse_xml(path):
@@ -185,6 +191,30 @@ def assign_target_ids(subfolder, subfolder_entities):
                 entity["targets"] = sorted(list(set([id_to_position[target] for target in entity["targets"]])))
     return par_id_to_len
 
+def reanalyze_complex_verb(verb, sub_tokens):
+    verb_xfeats = verb["xpos"].split(":")
+    verb_xpos = [f for f in verb_xfeats if morph_data["VAL2ATTR"][f] == "Part of Speech"][0]
+    for sub_token in sub_tokens:
+        if sub_token["head"] == verb["id"]:
+            # we're looking only at those subtokens which are dependent on the main token they are bound with
+            # i.e. passing over cases in which a clitic is conjoined with a syntactically unrelated word
+            sub_token_feats = sub_token["feats"]
+            sub_token_xfeats = sub_token["xpos"].split(":")
+            if sub_token["deprel"] == "aux:clitic":
+                x_person = [f for f in sub_token_xfeats if morph_data["VAL2ATTR"][f] == "person"][0]
+                verb_xfeats.append(x_person)
+                ud_person = sub_token_feats["Person"]
+                verb["feats"]["Person"] = ud_person
+
+            elif sub_token["deprel"] == "aux:cnd":
+                verb_xfeats.remove(verb_xpos)
+                verb_xfeats.append("cond")
+
+                ud_mood = "Cnd"
+                verb["feats"]["Mood"] = ud_mood
+
+    sorted_verb_xpos = sorted(verb_xfeats, key=lambda feat: morph_data["ATTRIBUTE_ORDER"][morph_data["VAL2ATTR"][feat]])
+    verb["xpos"] = ":".join(sorted_verb_xpos)
 
 def retokenize_conllu_sent(sent):
     # merges subtokens, and transfers their properties onto the result
@@ -197,10 +227,27 @@ def retokenize_conllu_sent(sent):
             to_subsume.extend([tok for tok in sent if tok["id"] in sub_ids])
             sub_tokens = [id_to_token[sub_id] for sub_id in sub_ids]
             main_sub = [tok for tok in sub_tokens if tok["head"] not in sub_ids][0]
+            # choosing the main subtoken as the FIRST one not to be dependent on others
             for sub_token in sub_tokens:
                 sub_token["inheritor"] = main_sub["id"]
+
+            if main_sub["upos"] == "VERB":
+                reanalyze_complex_verb(main_sub, sub_tokens)
+
             keys = [key for key in token.keys() if key not in ["form", "misc", "deps"]]
             token.update({k: main_sub[k] for k in keys})
+
+        token_xfeats = token["xpos"].split(":")
+        token_xpos = [f for f in token_xfeats if morph_data["VAL2ATTR"][f] == "Part of Speech"][0]
+        if token_xpos in ["praet", "cond", "winien"]:
+            if "Person" not in token["feats"]:
+                # person has not been assigned
+                # always assign third person then
+                token_xfeats.append("ter")
+                token["feats"]["Person"] = "3"
+                sorted_token_xfeats = sorted(token_xfeats, key=lambda feat: morph_data["ATTRIBUTE_ORDER"][morph_data["VAL2ATTR"][feat]])
+                token["xpos"] = ":".join(sorted_token_xfeats)
+
     non_subsumed = [tok for tok in sent if tok not in to_subsume]
     old_id_to_new_id = {tok["id"]: i+1 for i, tok in enumerate(non_subsumed)}
     for sub_tok in to_subsume:
@@ -212,6 +259,7 @@ def retokenize_conllu_sent(sent):
     for tok in to_subsume:
         sent.remove(tok)
     return sent
+
 
 
 def extract_seg_ids(subfolder):

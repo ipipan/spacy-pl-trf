@@ -384,5 +384,22 @@
     "xcomp:cleft": [
       "number"
     ]
+  },
+  "ATTRIBUTE_ORDER": {
+    "Part of Speech": 0,
+    "number": 1,
+    "case": 2,
+    "gender": 3,
+    "person": 4,
+    "aspect": 5,
+    "negation": 6,
+    "degree": 7,
+    "accomodability": 8,
+    "collectivity": 9,
+    "vocality": 10,
+    "agglutination": 11,
+    "accentibility": 12,
+    "prepositionality": 13,
+    "fullstoppedness": 14
   }
 }
