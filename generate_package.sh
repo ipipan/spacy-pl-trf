@@ -17,7 +17,7 @@ cp $trained_model_dir/meta.json .
 python3 save_model.py --version $model_version --model_dir $trained_model_dir --model_name nask
 sed -i 's/spacy-transformers.null_annotation_setter.v1/spacy-transformers.trf_to_vec_annotation_setter.v1/g' pl_nask-$model_version/config.cfg
 mkdir -p pkgmodel
-mkdir pl_nask-$model_version/static
+mkdir -p pl_nask-$model_version/static
 cp -r static/* pl_nask-$model_version/static
-python3 -m spacy package pl_nask-$model_version pkgmodel --code morf.py,vectorizer.py,morf_interface.py
+python3 -m spacy package --force pl_nask-$model_version pkgmodel --code morf.py,vectorizer.py,morf_interface.py
 echo Model saved to pkgmodel/pl_nask-$model_version/dist/pl_nask-$model_version.tar.gz

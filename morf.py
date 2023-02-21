@@ -48,7 +48,7 @@ class Morfeusz(Pipe):
         self.mode = mode
         self.overwrite = overwrite
         self.scorer = scorer
-        self.morf = morfeusz2.Morfeusz(expand_tags=True)
+        self.morf = morfeusz2.Morfeusz(expand_tags=True, praet="composite")
         self._flexer = Flexer(self)
         self.freq_dict = self.load_freq_dict()
         self.dim_dict = self.load_diminutives()
@@ -250,6 +250,9 @@ class Morfeusz(Pipe):
             if tok.lemma_ == "" or self.overwrite:
                 tok.lemma_ = best["lemma"]
                 tok._.disambiguator = best["disambiguator"]
+                if tok.tag_ == "brev:pun":
+                    tok.lemma_ = tok.norm_
+
 
 
     def __call__(self, doc):
