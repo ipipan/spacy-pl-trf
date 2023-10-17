@@ -395,6 +395,7 @@ class Flexer():
         children = list(head.children)
         children_to_lemmatize = [child for child in children if child.dep_ not in self.governing_deprels]
         governing_children = [child for child in children if child.dep_ in self.governing_deprels]
+        target_tag = "ign"
         if governing_children:
             governor = governing_children[0]
             lemmatized_governor_subtree = self.lemmatize_subtree(governor)
@@ -419,7 +420,7 @@ class Flexer():
                     child_pattern = ":".join(accomodable_feats)
                     lemmatized_subtree = self.flex_subtree(child, child_pattern)
             else:
-                    lemmatized_subtree = {tok.ind: tok.orth_ + tok.whitespace_ for tok in child.subtree}
+                    lemmatized_subtree = {tok.i: tok.orth_ + tok.whitespace_ for tok in child.subtree}
             ind_to_lemmatized.update(lemmatized_subtree)
         return ind_to_lemmatized
 
